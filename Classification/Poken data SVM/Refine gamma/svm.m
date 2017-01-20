@@ -94,4 +94,4 @@ result(j,1:3)=[gamma accuracy(1) accuracy2(1)]
 
 end
 
-save All_results2
+save All_results

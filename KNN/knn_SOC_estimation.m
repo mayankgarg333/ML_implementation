@@ -1,5 +1,3 @@
-
-
 clc
 close all
 clear all
@@ -15,12 +13,11 @@ for k=[25:5:90]
     end
 end
 
-X=F(:,1:7);
+X=F(:,1:end-1);
 Y=F(:,end);
+mdl=fitcknn(X,Y,'NumNeighbors',3);
 
-
-%% test data and testing
-
+%% test data and predeiction
 
 F=[];
 for k=[60:5:90]
@@ -31,11 +28,11 @@ for k=[60:5:90]
     end
 end
     
-Xnew=F(:,1:7);
+Xnew=F(:,1:end-1);
 Ynew=F(:,end);
-label = knnclassify(Xnew, X, Y,3);
+label = predict(mdl,Xnew);
 
-%%
+%% Plot the results
 fig=figure();
 set(fig,'color',[1 1 1])
 subplot(1,2,1)
@@ -57,10 +54,7 @@ set(gca,'LineWidth',2)
 
 
 
-% max(abs(simple-Ynew))*100
-
-%% test data and testing
-
+%% test data and predeiction
 
 F=[];
 for k=[60:5:90]
@@ -71,11 +65,12 @@ for k=[60:5:90]
     end
 end
     
-Xnew=F(:,1:7);
+Xnew=F(:,1:end-1);
 Ynew=F(:,end);
-label = knnclassify(Xnew, X, Y,3);
+label = predict(mdl,Xnew);
 
-%%
+%% Plot the results
+
 subplot(1,2,2)
 simple = label;
 plot(simple,'Linewidth',2)
