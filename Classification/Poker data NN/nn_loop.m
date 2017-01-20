@@ -1,3 +1,8 @@
+clc
+clear all
+close all
+
+
 result=[];
 save result.mat result
 for k=35:60
@@ -78,27 +83,4 @@ if (1-percentErrors_t)*100 >100
 end
 clear all
 end
-
-a=5
-load poker_train.data
-load poker_test.data
-poker=[poker_train;poker_test];
-poker(:,end)=poker(:,end)+1;
-test = poker;  %stores the test samples
-test_mat=test(:,1:end-1);
-test_y=test(:,end);
-classes=10;
-B=test_y*ones(1,classes);
-D=ones(length(test_y),1)*[1:classes];
-test_y=(B==D);
-
-x_t=test_mat';
-t_t=test_y';
-y_t = net(x_t);
-e_t = gsubtract(t_t,y_t);
-tind_t = vec2ind(t_t);
-yind_t = vec2ind(y_t);
-percentErrors_t = sum(tind_t ~= yind_t)/numel(tind_t);
-performance_t = perform(net,t_t,y_t);
-final_result=[hiddenLayerSize (1-percentErrors)*100 (1-percentErrors_t)*100]
 

@@ -1,4 +1,12 @@
+% 50 simulataion for optimal Gamma value for different test and training
+% set to make sure that the algorithms is working fine
+
+
 clear all; close all; clc
+
+
+addpath(genpath('..\..\lib\'))
+
 load poker_train.data
 load poker_test.data
 poker_i=[poker_train;poker_test];
@@ -29,7 +37,7 @@ for j=1:50
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 train1 = []; %stores the training samples
 test = [];  %stores the test samples
-for i=1:10 % changed to (8-classes:7) for reverse classes 
+for i=1:10 
     ind{i} = find(poker(:,end)==i);
     len = length(ind{i});
     t = randperm(len);
@@ -76,5 +84,5 @@ end
 result(j,1:3)=[gamma accuracy(1) accuracy2(1)]
 
 end
-save 'All_result.mat'
+save All_result
 
